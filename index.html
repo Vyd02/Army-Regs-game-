@@ -1,0 +1,616 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>261st MMB Board Prep</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Saira+Condensed:wght@500;700;800&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@500&display=swap">
+<style>
+/* Layout: field-manual binder — sticky tab strip, one working column (max 760px), index-card surfaces for drills */
+:root{
+  --bg:#f3f3ee; --surface:#fbfbf8; --sunk:#e7e8df; --fg:#1f241c; --muted:#5d6455; --line:#cfd2c3;
+  --accent:#7d1f2c; --accent-fg:#ffffff; --accent-soft:#f1e1e3; --olive:#4d5a35;
+  --good:#2f6b3a; --good-soft:#dcebdd; --bad:#a3322a; --bad-soft:#f5dfdc; --warn:#8a6a12; --warn-soft:#f3ead0;
+  --display:"Saira Condensed","Arial Narrow",system-ui,sans-serif;
+  --body:"IBM Plex Sans",system-ui,-apple-system,"Segoe UI",sans-serif;
+  --mono:"IBM Plex Mono",ui-monospace,Menlo,Consolas,monospace;
+  --r:10px;
+}
+@media (prefers-color-scheme: dark){ :root:not([data-theme="light"]){
+  --bg:#151812; --surface:#1d2119; --sunk:#262b21; --fg:#e7e9df; --muted:#a3aa96; --line:#363c2f;
+  --accent:#d0707c; --accent-fg:#1a0b0e; --accent-soft:#3a2226; --olive:#a9b98a;
+  --good:#7cc68a; --good-soft:#1f3423; --bad:#ec8b81; --bad-soft:#3d2320; --warn:#e0bf62; --warn-soft:#38301a;
+  color-scheme:dark }}
+:root[data-theme="dark"]{
+  --bg:#151812; --surface:#1d2119; --sunk:#262b21; --fg:#e7e9df; --muted:#a3aa96; --line:#363c2f;
+  --accent:#d0707c; --accent-fg:#1a0b0e; --accent-soft:#3a2226; --olive:#a9b98a;
+  --good:#7cc68a; --good-soft:#1f3423; --bad:#ec8b81; --bad-soft:#3d2320; --warn:#e0bf62; --warn-soft:#38301a;
+  color-scheme:dark }
+*{box-sizing:border-box}
+[hidden]{display:none!important}
+html,body{margin:0}
+body{background:var(--bg);color:var(--fg);font:15px/1.55 var(--body);-webkit-text-size-adjust:100%}
+body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset-top,0px);z-index:10;background:var(--surface)}
+button{font:inherit;color:inherit}
+:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+.wrap{max-width:760px;margin:0 auto;padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px))}
+header.top{background:var(--surface);border-bottom:1px solid var(--line);position:sticky;top:env(safe-area-inset-top,0px);z-index:5}
+.brand{display:flex;align-items:baseline;justify-content:space-between;gap:12px;padding-block:12px 4px}
+.brand h1{font:800 26px/1 var(--display);letter-spacing:.01em;margin:0;text-transform:uppercase}
+.brand h1 span{color:var(--accent)}
+.brand small{color:var(--muted);font:500 12px var(--mono);white-space:nowrap}
+nav.tabs{display:flex;gap:2px;overflow-x:auto;scrollbar-width:none}
+nav.tabs::-webkit-scrollbar{display:none}
+nav.tabs button{background:none;border:0;border-bottom:3px solid transparent;padding:10px 12px 9px;font:700 16px var(--display);letter-spacing:.06em;text-transform:uppercase;color:var(--muted);cursor:pointer;white-space:nowrap}
+nav.tabs button[aria-selected="true"]{color:var(--fg);border-bottom-color:var(--accent)}
+main{padding-block:20px 64px}
+section.view{display:grid;gap:18px}
+h2{font:800 30px/1.05 var(--display);text-transform:uppercase;letter-spacing:.01em;margin:0;text-wrap:balance}
+h3{font:700 19px/1.2 var(--display);text-transform:uppercase;letter-spacing:.04em;margin:0}
+p{margin:0}
+.lede{color:var(--muted);max-width:62ch}
+.eyebrow{font:500 12px var(--mono);letter-spacing:.08em;text-transform:uppercase;color:var(--muted)}
+.pub{font:500 12px var(--mono);background:var(--sunk);border:1px solid var(--line);border-radius:4px;padding:1px 6px;white-space:nowrap}
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:6px;border:1px solid var(--line);background:var(--surface);border-radius:8px;padding:9px 14px;font-weight:600;cursor:pointer;min-height:42px}
+.btn:hover{border-color:var(--muted)}
+.btn.primary{background:var(--accent);color:var(--accent-fg);border-color:var(--accent)}
+.btn.good{background:var(--good-soft);border-color:var(--good);color:var(--good)}
+.btn.bad{background:var(--bad-soft);border-color:var(--bad);color:var(--bad)}
+.btn.warn{background:var(--warn-soft);border-color:var(--warn);color:var(--warn)}
+.row{display:flex;flex-wrap:wrap;gap:8px;align-items:center}
+.chip{border:1px solid var(--line);background:var(--surface);border-radius:999px;padding:5px 12px;font-size:13px;font-weight:500;cursor:pointer}
+.chip[aria-pressed="true"]{background:var(--fg);color:var(--bg);border-color:var(--fg)}
+select{font:inherit;padding:8px 10px;border-radius:8px;border:1px solid var(--line);background:var(--surface);color:var(--fg);min-height:42px;max-width:100%}
+
+/* Readiness summary */
+.summary{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:var(--line);border:1px solid var(--line);border-radius:var(--r);overflow:hidden}
+.summary div{background:var(--surface);padding:12px 14px;display:grid;gap:2px}
+.summary b{font:800 28px/1 var(--display);font-variant-numeric:tabular-nums}
+.summary span{font-size:12px;color:var(--muted)}
+
+/* Study list */
+.topics{display:grid;gap:8px}
+details.topic{background:var(--surface);border:1px solid var(--line);border-radius:var(--r)}
+details.topic>summary{list-style:none;cursor:pointer;display:grid;grid-template-columns:2.2em 1fr auto;gap:10px;align-items:center;padding:12px 14px}
+details.topic>summary::-webkit-details-marker{display:none}
+.tnum{font:800 22px/1 var(--display);color:var(--accent);font-variant-numeric:tabular-nums}
+.ttitle{min-width:0}
+.ttitle strong{display:block;font:700 18px/1.15 var(--display);text-transform:uppercase;letter-spacing:.02em}
+.ttitle .pub{margin-top:4px;display:inline-block}
+.meter{width:54px;height:6px;border-radius:3px;background:var(--sunk);overflow:hidden}
+.meter i{display:block;height:100%;background:var(--good)}
+.tbody{padding:0 14px 16px;display:grid;gap:14px;border-top:1px solid var(--line);padding-top:14px}
+.tbody ul{margin:0;padding-left:1.15em;display:grid;gap:5px}
+.tbody li{max-width:68ch}
+.tbody li b{font-weight:600}
+.note{background:var(--warn-soft);border-left:3px solid var(--warn);padding:9px 12px;border-radius:0 6px 6px 0;font-size:14px}
+.qa{display:grid;gap:8px}
+.qa button{text-align:left;width:100%;background:var(--sunk);border:1px solid var(--line);border-radius:8px;padding:10px 12px;cursor:pointer;display:grid;gap:6px}
+.qa .q{font-weight:600}
+.qa .q::before{content:"Q  ";font:500 12px var(--mono);color:var(--accent)}
+.qa .a{color:var(--fg)}
+.qa .a::before{content:"A  ";font:500 12px var(--mono);color:var(--good)}
+.qa .hint{font-size:12px;color:var(--muted)}
+.check{display:grid;gap:6px}
+.check label{display:flex;gap:10px;align-items:flex-start;cursor:pointer;padding:6px 0}
+.check input{width:18px;height:18px;margin-top:2px;accent-color:var(--good);flex:none}
+
+/* Flashcard */
+.card-stage{perspective:1200px}
+.flash{position:relative;width:100%;min-height:260px;border:0;background:none;padding:0;cursor:pointer;transform-style:preserve-3d;transition:transform .45s ease}
+.flash.flipped{transform:rotateY(180deg)}
+.face{position:absolute;inset:0;backface-visibility:hidden;-webkit-backface-visibility:hidden;border-radius:12px;border:1px solid var(--line);background:var(--surface);padding:22px 22px 18px;display:flex;flex-direction:column;justify-content:space-between;gap:12px;text-align:left;
+  background-image:repeating-linear-gradient(to bottom,transparent 0 31px,var(--sunk) 31px 32px);background-position:0 56px}
+.face.back{transform:rotateY(180deg);border-color:var(--olive)}
+.face .ftext{font:600 21px/1.35 var(--body);text-wrap:balance}
+.face.back .ftext{font-weight:500;font-size:18px}
+.face .fmeta{display:flex;justify-content:space-between;gap:8px;font:500 12px var(--mono);color:var(--muted);text-transform:uppercase;letter-spacing:.06em}
+.progress{height:6px;background:var(--sunk);border-radius:3px;overflow:hidden}
+.progress i{display:block;height:100%;background:var(--accent);transition:width .25s}
+.count{font:500 13px var(--mono);color:var(--muted);font-variant-numeric:tabular-nums}
+
+/* Quiz */
+.panel{background:var(--surface);border:1px solid var(--line);border-radius:12px;padding:18px;display:grid;gap:14px}
+.qtext{font:600 19px/1.35 var(--body)}
+.opts{display:grid;gap:8px}
+.opt{text-align:left;border:1px solid var(--line);background:var(--bg);border-radius:8px;padding:11px 12px;cursor:pointer;display:grid;grid-template-columns:1.6em 1fr;gap:8px;align-items:start}
+.opt .k{font:500 13px var(--mono);color:var(--muted)}
+.opt.right{background:var(--good-soft);border-color:var(--good)}
+.opt.wrong{background:var(--bad-soft);border-color:var(--bad)}
+.opt:disabled{cursor:default}
+.result-big{font:800 64px/1 var(--display);font-variant-numeric:tabular-nums}
+.missed{display:grid;gap:8px}
+.missed div{border-left:3px solid var(--bad);padding:4px 0 4px 10px}
+.missed small{display:block;color:var(--muted)}
+
+/* Board */
+.board-q{font:600 22px/1.35 var(--body);text-wrap:balance}
+.timer{display:flex;align-items:center;gap:12px}
+.timer b{font:800 40px/1 var(--display);font-variant-numeric:tabular-nums;min-width:2.4ch}
+.timer .bar{flex:1;height:8px;background:var(--sunk);border-radius:4px;overflow:hidden}
+.timer .bar i{display:block;height:100%;background:var(--olive);transition:width 1s linear}
+.timer.late b{color:var(--bad)} .timer.late .bar i{background:var(--bad)}
+.formula{display:grid;grid-template-columns:repeat(3,1fr);gap:6px}
+.formula div{background:var(--sunk);border-radius:6px;padding:8px 10px;font-size:13px}
+.formula b{display:block;font:700 15px var(--display);text-transform:uppercase;letter-spacing:.05em;color:var(--accent)}
+
+/* Drills */
+.drill-grid{display:grid;gap:14px}
+.compass{display:grid;grid-template-columns:140px 1fr;gap:18px;align-items:center}
+.compass canvas{width:140px;height:140px}
+input[type="number"],input[type="text"]{font:600 22px var(--mono);width:7ch;padding:6px 10px;border:1px solid var(--line);border-radius:8px;background:var(--bg);color:var(--fg)}
+.feedback{font-weight:600;min-height:1.5em}
+.feedback.ok{color:var(--good)} .feedback.no{color:var(--bad)}
+.lines{display:grid;gap:6px;counter-reset:ln}
+.line{display:grid;grid-template-columns:3.4em 1fr auto;gap:8px;align-items:center;background:var(--bg);border:1px solid var(--line);border-radius:8px;padding:6px 8px}
+.line .ln{font:500 13px var(--mono);color:var(--muted)}
+.line.ok{border-color:var(--good);background:var(--good-soft)}
+.line.no{border-color:var(--bad);background:var(--bad-soft)}
+.line .mv{display:flex;gap:4px}
+.line .mv button{width:34px;height:34px;border:1px solid var(--line);border-radius:6px;background:var(--surface);cursor:pointer}
+.acro{display:flex;flex-wrap:wrap;gap:6px}
+.acro button{min-width:44px;height:44px;border:1px solid var(--line);border-radius:8px;background:var(--bg);font:800 20px var(--display);cursor:pointer;padding:0 10px}
+.acro button.done{background:var(--good-soft);border-color:var(--good);color:var(--good)}
+.acro-words{display:grid;gap:4px;font-size:14px}
+.acro-words span.hide{color:transparent;background:var(--sunk);border-radius:4px;user-select:none}
+
+.disclaimer{font-size:12px;color:var(--muted);border-top:1px solid var(--line);padding-top:14px;max-width:70ch}
+@media (max-width:520px){
+  .brand h1{font-size:22px}
+  .brand small{display:none}
+  .summary b{font-size:24px}
+  .compass{grid-template-columns:1fr;justify-items:start}
+  .formula{grid-template-columns:1fr}
+  .board-q{font-size:19px}
+  .face .ftext{font-size:19px}
+}
+@media (prefers-reduced-motion:reduce){*{transition:none!important;animation:none!important}}
+</style>
+</head>
+<body>
+<header class="top">
+  <div class="wrap">
+    <div class="brand"><h1>261st MMB <span>Board Prep</span></h1><small>OCT 2026 · SOM / NCOM / OOM</small></div>
+    <nav class="tabs" role="tablist" aria-label="Sections">
+      <button role="tab" data-view="study" id="tab-study">Study</button>
+      <button role="tab" data-view="cards" id="tab-cards">Flashcards</button>
+      <button role="tab" data-view="quiz" id="tab-quiz">Quiz</button>
+      <button role="tab" data-view="board" id="tab-board">Mock Board</button>
+      <button role="tab" data-view="drills" id="tab-drills">Drills</button>
+    </nav>
+  </div>
+</header>
+
+<main class="wrap">
+  <!-- STUDY -->
+  <section class="view" id="view-study">
+    <div class="summary" aria-label="Your progress">
+      <div><b id="sum-known">0</b><span>cards marked known</span></div>
+      <div><b id="sum-quiz">–</b><span>best quiz score</span></div>
+      <div><b id="sum-check">0/14</b><span>self-check items</span></div>
+    </div>
+    <div class="panel">
+      <h3>Board-answer formula</h3>
+      <div class="formula">
+        <div><b>Answer</b>Give the direct answer first.</div>
+        <div><b>Explain</b>Give the reason or standard.</div>
+        <div><b>Apply</b>Say what you would do.</div>
+      </div>
+      <p class="lede">Board members may ask two situational or fact-based questions from each subject area. Speak each answer aloud in 20–40 seconds. Never bluff a regulation number or medical detail: give the best accurate answer you know, then say you would verify the current publication or SOP.</p>
+    </div>
+    <div class="topics" id="topics"></div>
+    <div class="panel">
+      <h3>Final self-check</h3>
+      <div class="check" id="selfcheck"></div>
+    </div>
+    <div class="panel">
+      <h3>Official references</h3>
+      <div class="qa" id="links"></div>
+    </div>
+  </section>
+
+  <!-- FLASHCARDS -->
+  <section class="view" id="view-cards" hidden>
+    <div><h2>Flashcards</h2><p class="lede">Tap the card to flip it. Cards you miss come back in the same session. Known cards count toward each topic's meter.</p></div>
+    <div class="row">
+      <label for="card-deck" class="eyebrow">Deck</label>
+      <select id="card-deck"></select>
+      <button class="chip" id="card-unknown" aria-pressed="false">Only cards not yet known</button>
+    </div>
+    <div class="progress"><i id="card-prog" style="width:0"></i></div>
+    <div class="row" style="justify-content:space-between"><span class="count" id="card-count"></span><button class="btn" id="card-shuffle">Shuffle</button></div>
+    <div class="card-stage">
+      <button class="flash" id="flash" aria-live="polite">
+        <div class="face front"><div class="fmeta"><span id="f-topic"></span><span>Prompt</span></div><div class="ftext" id="f-q"></div><div class="fmeta"><span>Tap to flip</span><span></span></div></div>
+        <div class="face back"><div class="fmeta"><span id="f-topic2"></span><span>Answer</span></div><div class="ftext" id="f-a"></div><div class="fmeta"><span>Did you know it?</span><span></span></div></div>
+      </button>
+    </div>
+    <div class="row" style="justify-content:center">
+      <button class="btn bad" id="card-again">Again</button>
+      <button class="btn" id="card-flip">Flip</button>
+      <button class="btn good" id="card-know">Knew it</button>
+    </div>
+  </section>
+
+  <!-- QUIZ -->
+  <section class="view" id="view-quiz" hidden>
+    <div><h2>Quiz</h2><p class="lede">Ten multiple-choice questions drawn from the guide's practice questions and flashcards. Wrong choices come from other answers in the guide, so read every option.</p></div>
+    <div class="row">
+      <label for="quiz-topic" class="eyebrow">Topic</label>
+      <select id="quiz-topic"></select>
+      <button class="btn primary" id="quiz-start">Start quiz</button>
+    </div>
+    <div id="quiz-area"></div>
+  </section>
+
+  <!-- BOARD -->
+  <section class="view" id="view-board" hidden>
+    <div><h2>Mock Board</h2><p class="lede">One question at a time in random order, like the real board. Answer out loud before the clock runs out, then reveal the guide's answer and grade yourself honestly.</p></div>
+    <div class="row" role="group" aria-label="Board type">
+      <span class="eyebrow">Board</span>
+      <button class="chip" data-role="soldier" aria-pressed="true">Soldier</button>
+      <button class="chip" data-role="nco" aria-pressed="false">NCO</button>
+      <button class="chip" data-role="officer" aria-pressed="false">Officer</button>
+    </div>
+    <div class="row">
+      <label for="board-time" class="eyebrow">Time per answer</label>
+      <select id="board-time"><option value="30">30 s</option><option value="40" selected>40 s</option><option value="60">60 s</option><option value="0">No timer</option></select>
+      <button class="btn primary" id="board-start">Start board</button>
+    </div>
+    <div id="board-area"></div>
+  </section>
+
+  <!-- DRILLS -->
+  <section class="view" id="view-drills" hidden>
+    <div><h2>Drills</h2><p class="lede">Short exercises for the details boards like to test: back azimuths, the nine-line order, and the acronyms.</p></div>
+    <div class="drill-grid">
+      <div class="panel">
+        <h3>Back azimuth</h3>
+        <div class="compass">
+          <canvas id="compass" width="280" height="280" aria-label="Compass showing the azimuth"></canvas>
+          <div style="display:grid;gap:10px">
+            <p>Azimuth: <b class="pub" id="az" style="font-size:16px"></b>. What is the back azimuth?</p>
+            <form class="row" id="az-form"><input type="number" id="az-in" min="0" max="359" inputmode="numeric" aria-label="Back azimuth in degrees"><span>°</span><button class="btn primary" type="submit">Check</button><button class="btn" type="button" id="az-next">New</button></form>
+            <div class="feedback" id="az-fb" aria-live="polite"></div>
+            <span class="count" id="az-score">Streak 0</span>
+          </div>
+        </div>
+        <p class="lede">Add 180° if the azimuth is below 180°. Subtract 180° if it is 180° or above.</p>
+      </div>
+      <div class="panel">
+        <h3>Nine-line MEDEVAC order</h3>
+        <p class="lede">Put the lines in order with the arrows, then check. Verify the exact format on your current unit card and ATP 4-02.2.</p>
+        <div class="lines" id="lines"></div>
+        <div class="row"><button class="btn primary" id="lines-check">Check order</button><button class="btn" id="lines-shuffle">Shuffle</button></div>
+        <div class="feedback" id="lines-fb" aria-live="polite"></div>
+      </div>
+      <div class="panel">
+        <h3>Acronym recall</h3>
+        <div class="row"><select id="acro-pick" aria-label="Acronym"></select><button class="btn" id="acro-reset">Hide all</button></div>
+        <p class="lede">Say each word, then tap its letter to check yourself.</p>
+        <div class="acro" id="acro-letters"></div>
+        <div class="acro-words" id="acro-words"></div>
+      </div>
+    </div>
+  </section>
+
+  <p class="disclaimer">Study aid built from the 261st MMB October 2026 board study guide. It does not replace current Army publications, your unit SOP, or board-president guidance. Verify exact wording, measurements, wear rules, weapons procedures, and medical protocols in the current official publication.</p>
+</main>
+
+<script>
+const TOPICS = [
+ {id:"bio", t:"Autobiography", ref:"", intro:"Prepare a 45–90 second introduction. Keep it professional, truthful, and easy to follow. Do not memorize it so tightly that you sound robotic.",
+  sec:[["Suggested structure",["Name, rank, unit, duty position, and MOS (only as relevant to your board).","Where you are from and one brief personal detail that helps the board know you.","Military background: time in service, previous assignments, schools, or meaningful duties.","One accomplishment and what it taught you.","Professional goal and how you plan to contribute to the unit."]]],
+  note:"Template: “Good morning, board members. I am [rank/name], assigned to [unit] as a [duty position]. I am originally from [place]. In the Army, I have worked on [duties]. One accomplishment I am proud of is [example], because it taught me [lesson]. My current goal is to [goal], and I intend to contribute to the battalion by [action].”",
+  qa:[["What makes a strong autobiography?","It is concise, truthful, organized, professional, and focused on service, accomplishments, lessons learned, and future goals."],["What should you avoid in your autobiography?","Rambling, slang, negative comments about leaders or units, exaggerating accomplishments, and sharing unnecessary sensitive personal information."]]},
+ {id:"creed", t:"NCO Creed & Soldier’s Creed", ref:"", intro:"Study the exact current text from your official unit source. The board may expect recitation, not just a summary.",
+  sec:[["NCO Creed: core ideas",["NCOs are responsible for the welfare, training, discipline, and professional development of Soldiers entrusted to them.","Lead by example; enforce standards fairly and consistently; know your Soldiers and their capabilities.","Train Soldiers and teams to standard, maintain equipment, and accomplish the mission.","Exercise initiative within commander’s intent; communicate clearly; correct deficiencies promptly.","Protect the dignity and well-being of Soldiers while maintaining readiness and accountability."]],["Soldier’s Creed: core ideas",["Commitment to the Army Values, the mission, and the Nation.","Readiness, physical and mental toughness, and professional competence.","Treating others with dignity and respect; never accepting defeat or quitting when the mission is difficult.","Living the Warrior Ethos: mission first, never accepting defeat, never quitting, and never leaving a fallen comrade."]]],
+  note:"Practice reciting the official text verbatim. This guide summarizes the themes and does not replace memorizing the full creed.",
+  qa:[["What is the purpose of the NCO Creed?","It describes the responsibilities, standards, and professional identity expected of noncommissioned officers."],["What does the Warrior Ethos emphasize?","Mission first, never accepting defeat, never quitting, and never leaving a fallen comrade."]]},
+ {id:"news", t:"Current events", ref:"", intro:"Current events change daily. Prepare one national/international item, one defense/Army item, and one local or unit-relevant item. Use reputable sources and know the date.",
+  sec:[["Briefing template: 30–45 seconds",["What happened? State the event and date.","Where and who is involved?","Why does it matter to the United States, the Army, or your unit?","What is confirmed versus still developing?","What is one professional takeaway for Soldiers?"]]],
+  note:"Before the board, check official Army and Department of Defense news, plus at least one reputable independent outlet. Avoid repeating social-media rumors as facts.",
+  qa:[["How do you know a current-events source is reliable?","Check the publication date, named reporting or official statements, corroboration by independent reputable outlets, and whether it separates verified facts from speculation."],["What if a board member challenges your opinion on a current event?","Stay professional. Separate facts from your interpretation, acknowledge uncertainty, and explain your reasoning without arguing."]]},
+ {id:"cc", t:"Customs and courtesies", ref:"AR 600-25", intro:"AR 600-25, Salutes, Honors, and Visits of Courtesy. Use the current edition for exact requirements and exceptions.",
+  sec:[["Key principles",["Render appropriate courtesies to the President, commissioned and warrant officers, colors, and other persons or occasions as required by regulation.","Outdoors in uniform, the salute is normally rendered and returned according to regulation; indoors, rules differ and there are exceptions.","A salute is a greeting and a sign of mutual respect, not a casual wave. Pair it with a professional greeting when appropriate.","When reporting to an officer indoors, follow the unit’s reporting procedure and the applicable regulation.","During reveille, retreat, and the national anthem, follow the protocol for location, uniform, and whether the flag is visible.","Address officers and NCOs by the correct rank/title; use professional language and military bearing.","When in doubt about a ceremony, observe the formation leader and follow the prescribed sequence; do not improvise honors."]],["Board traps",["Do not say every situation requires a salute; the regulation includes circumstances and exceptions.","Do not confuse customs and courtesies with drill. AR 600-25 covers salutes, honors, and visits of courtesy; TC 3-21.5 covers drill and ceremonies.","Know your unit’s reporting statement, but distinguish local SOP from Army-wide regulation."]]],
+  qa:[["Why do Soldiers render salutes?","As a mark of respect and recognition of commissioned authority and military tradition."],["What regulation is listed for customs and courtesies?","AR 600-25, Salutes, Honors, and Visits of Courtesy."],["What should you do if unsure of a specific honor?","Check the current AR 600-25 and applicable ceremony guidance rather than guessing."]]},
+ {id:"m4", t:"M4 rifle and marksmanship", ref:"TC 3-22.9", intro:"A knowledge-and-safety section, not a substitute for hands-on instruction, unit range SOP, or a qualified instructor.",
+  sec:[["Four universal weapon-safety rules",["Treat every weapon as if it is loaded.","Never point a weapon at anything you are not willing to destroy.","Keep your finger straight and off the trigger until your sights are on the target and you have decided to fire.","Know your target, what is in line with it, and what is beyond it."]],["Marksmanship fundamentals",["<b>Steady position:</b> a stable position that supports the rifle and reduces movement.","<b>Aiming:</b> align the sights/optic and place the aiming point on the target.","<b>Breath control:</b> manage breathing to reduce movement during the shot.","<b>Trigger control:</b> press the trigger smoothly without disturbing sight alignment.","<b>Follow-through:</b> maintain position and observe the result after the shot.","Consistency matters: repeat the same effective process for each shot."]],["Weapon status and range discipline",["Know the range’s commands and cease-fire procedures before handling a weapon.","Keep the muzzle in a safe direction; do not turn in a way that covers others.","Load, unload, clear, inspect, and remediate malfunctions only as trained and directed.","Use the correct ammunition and authorized configuration; never bypass a safety or improvise a repair.","Report unsafe conditions immediately."]]],
+  qa:[["What publication is listed for M4 marksmanship?","TC 3-22.9, Rifle and Carbine."],["What is trigger control?","Applying steady, controlled pressure to the trigger while minimizing movement that would disturb the sights."],["What do you do if a weapon malfunctions on a range?","Keep it pointed in a safe direction, keep your finger off the trigger, follow the range’s immediate-action and cease-fire procedures, and notify the instructor or range safety personnel."],["What is the purpose of follow-through?","To maintain the firing process and observe the shot’s result without prematurely disturbing the position."],["Name the four universal weapon-safety rules.","Treat every weapon as loaded; never point it at anything you are not willing to destroy; keep your finger straight and off the trigger until ready to fire; know your target and what is in line with and beyond it."]]},
+ {id:"nav", t:"Map reading and land navigation", ref:"TC 3-25.26", intro:"Map Reading and Land Navigation.",
+  sec:[["Map basics",["<b>Marginal information</b> identifies the map: title, sheet number, scale, contour interval, edition/date, and declination information.","<b>Scale</b> relates map distance to ground distance. On a 1:50,000 map, 1 unit on the map is 50,000 of the same units on the ground.","<b>Contour lines</b> connect points of equal elevation. Close together means steep; far apart means gentle.","A closed contour with higher elevations inward is generally a hill; hachured contours indicate a depression.","Grid coordinates: easting first, then northing — “right, then up.”","A six-digit grid is generally 100-meter precision on a 1:50,000 map; an eight-digit grid is generally 10-meter precision."]],["Direction and azimuth",["An <b>azimuth</b> is a horizontal angle measured clockwise from north, 000° to 359°.","<b>Back azimuth</b> differs by 180°: add 180° below 180°; subtract 180° at 180° or above.","Grid north, magnetic north, and true north differ. Use the declination diagram to convert.","Keep a compass away from metal, electronics, and magnetic interference.","<b>Terrain association</b> matches landforms on the map to what you see on the ground."]],["Navigation process",["Orient the map to the terrain or north.","Identify your location and destination; plot the route and checkpoints.","Measure map distance and determine the azimuth; account for declination.","Navigate to a checkpoint, confirm location, then continue.","Use a pace count; adjust for terrain, vegetation, and slope.","If lost: stop, stay calm, find your last known location, reorient, and use known features."]]],
+  qa:[["What is the correct order when giving a grid coordinate?","Easting first, then northing — “right, then up.”"],["How do you find a back azimuth?","Add 180° to azimuths under 180°; subtract 180° from azimuths of 180° or greater."],["What do closely spaced contour lines mean?","Steep terrain."],["What is terrain association?","Using recognizable terrain features to relate your position on the map to your position on the ground."],["What precision does an eight-digit grid give on a standard 1:50,000 map?","Generally 10-meter precision (a six-digit grid is generally 100-meter)."],["What does marginal information include?","Title, sheet number, scale, contour interval, edition/date, and declination information."],["What does a hachured contour indicate?","A depression."]]},
+ {id:"h2f", t:"H2F — Holistic Health and Fitness", ref:"FM 7-22", intro:"The Army’s system for developing and sustaining readiness across physical and nonphysical performance domains.",
+  sec:[["Five H2F domains",["<b>Physical:</b> strength, endurance, mobility, movement quality, physical readiness.","<b>Nutritional:</b> fueling, hydration, recovery, sustainable eating habits.","<b>Mental:</b> attention, confidence, emotional regulation, resilience, decision-making.","<b>Spiritual:</b> purpose, values, connection, and meaning; not limited to religious practice.","<b>Sleep:</b> sufficient, consistent, quality sleep for recovery, cognition, and performance."]],["Training principles",["Train progressively and specifically; build a base before adding intensity or volume.","Balance strength, aerobic endurance, power, mobility, and recovery.","Warm up, use correct technique, and adjust for pain, illness, heat, cold, and fatigue.","Recovery is part of training: sleep, hydration, nutrition, lower-intensity periods.","Report injury early and follow medical guidance.","Risk management and leader oversight help prevent avoidable training injuries."]]],
+  note:"The Army Fitness Test became the official test of record on June 1, 2025. Updated scoring standards have separate dates for specified combat MOS groups. Verify current AFT guidance for your MOS rather than older ACFT materials.",
+  qa:[["What does H2F stand for?","Holistic Health and Fitness."],["Name the five H2F domains.","Physical, nutritional, mental, spiritual, and sleep."],["Why is sleep a readiness issue?","Sleep supports recovery, attention, memory, mood regulation, judgment, and physical performance."],["What should a leader do when a Soldier reports pain during training?","Assess immediate safety, stop or modify the activity, seek medical evaluation when indicated, and follow command and medical guidance."],["When did the Army Fitness Test become the official test of record?","June 1, 2025."]]},
+ {id:"fa", t:"First aid", ref:"TC 4-02.1", intro:"Perform first aid within your training, equipment, and current medical protocols. In a real emergency, alert emergency medical support and follow unit procedures.",
+  sec:[["Immediate priorities",["Ensure scene safety and use PPE.","Check responsiveness and breathing; activate emergency response; get an AED/medical kit.","Control life-threatening bleeding immediately with direct pressure, hemostatic dressing, or tourniquet when indicated and trained.","Open/maintain the airway. If not breathing normally, begin CPR and use an AED.","Treat for shock: keep still and warm, reassure, monitor; no food or drink for a severely injured or unconscious casualty.","Prevent further injury, communicate casualty status, prepare for evacuation. Reassess often."]],["MARCH",["<b>M</b> — Massive hemorrhage: identify and control life-threatening bleeding.","<b>A</b> — Airway: assess and maintain an open airway.","<b>R</b> — Respiration: assess breathing and chest injuries.","<b>C</b> — Circulation: assess perfusion/shock and other bleeding.","<b>H</b> — Hypothermia / head injury: prevent heat loss and monitor for head injury."]],["Bleeding and shock",["Tourniquet for severe extremity bleeding: high and tight when the wound cannot be rapidly exposed; tighten until bleeding stops; do not loosen it.","Record the tourniquet time and tell medical personnel.","Signs of shock: pale/cool/clammy skin, rapid weak pulse, rapid breathing, confusion, worsening responsiveness.","Do not remove an impaled object; stabilize it.","Do not move a suspected spinal injury unless there is immediate danger or movement is needed for lifesaving care."]]],
+  qa:[["What does MARCH stand for?","Massive hemorrhage, Airway, Respiration, Circulation, and Hypothermia/head injury."],["What is the first priority at an unsafe scene?","Scene safety. Do not become another casualty."],["Should you loosen a tourniquet after applying it?","No. Do not loosen or remove it; communicate its application time to medical personnel."],["What do you do for a casualty who is unresponsive and not breathing normally?","Activate emergency response, get an AED, and begin CPR according to current training and protocol."],["Name signs of shock.","Pale, cool, clammy skin; rapid weak pulse; rapid breathing; confusion; worsening responsiveness."],["What do you do with an impaled object?","Do not remove it; stabilize it and seek medical support."]]},
+ {id:"dc", t:"Drill and ceremony", ref:"TC 3-21.5", intro:"Drill and Ceremonies.",
+  sec:[["Why drill matters",["Develops discipline, teamwork, confidence, precision, and response to commands.","Builds unit cohesion and enables orderly movement and ceremonial honors.","Commands generally have a preparatory command and a command of execution; some are combined."]],["Positions and commands",["<b>Attention:</b> prescribed position; still and silent.","<b>Parade rest:</b> prescribed rest position with bearing and silence.","<b>At ease:</b> relax as prescribed; do not talk unless permitted.","<b>Rest:</b> relax more than at ease while keeping foot placement and discipline.","<b>Present arms / order arms:</b> the prescribed salute or weapon movement.","<b>Right face / left face / about face:</b> facing movements on the command of execution.","<b>Dress right, dress / ready, front:</b> align the formation, then eyes front.","<b>Fall in / fall out:</b> form or dismiss the formation."]],["Command voice",["<b>Distinctness:</b> clear and understandable.","<b>Inflection:</b> differentiates preparatory command from command of execution.","<b>Cadence:</b> timing supports synchronized movement.","<b>Volume:</b> loud enough to hear without losing clarity."]]],
+  qa:[["What publication covers drill and ceremonies?","TC 3-21.5, Drill and Ceremonies."],["What are the two parts of a typical drill command?","The preparatory command and the command of execution."],["Why is drill important?","It develops discipline, teamwork, confidence, precision, and coordinated response."],["Name the four elements of command voice.","Distinctness, inflection, cadence, and volume."]]},
+ {id:"uni", t:"Uniform and insignia", ref:"AR 670-1", intro:"Use the current AR 670-1 and DA Pam 670-1. Local policy and approved exceptions may also apply.",
+  sec:[["Core standards",["Wear only authorized items and insignia, in the prescribed configuration and placement.","Maintain cleanliness, serviceability, fit, and professional appearance.","Follow grooming standards and rules for headgear, footwear, badges, tabs, patches, awards, and jewelry.","Local guidance cannot override higher-level policy.","When uncertain, verify the current regulation and wear guide before wearing an item."]],["Insignia categories",["<b>Rank insignia:</b> grade/rank.","<b>Branch insignia:</b> branch affiliation where authorized.","<b>Shoulder sleeve insignia:</b> unit affiliation or former wartime service.","<b>Distinctive unit insignia:</b> identifies certain units.","<b>Skill badges and tabs:</b> qualification or authorization.","<b>Awards and decorations:</b> recognize qualifying service, achievement, or valor under AR 600-8-22."]]],
+  qa:[["What regulation covers wear and appearance of Army uniforms and insignia?","AR 670-1, with DA Pam 670-1 as the detailed guide."],["What should you do if you are unsure where an insignia belongs?","Check the current AR 670-1 and DA Pam 670-1 or ask the chain of command before wearing it."],["Can a local custom override the uniform regulation?","No. Local procedures can add detail but cannot authorize what higher policy prohibits."]]},
+ {id:"aw", t:"Awards and decorations", ref:"AR 600-8-22", intro:"Military Awards.",
+  sec:[["Know the distinction",["<b>Decorations</b> recognize valor, heroism, meritorious achievement, or service.","<b>Service and campaign medals</b> recognize qualifying service in designated periods or operations.","<b>Unit awards</b> recognize collective unit performance.","<b>Badges and tabs</b> are qualification or skill indicators, not personal decorations.","Certificates, coins, and letters of appreciation are not automatically military decorations."]],["Recommendation principles",["Accurate, supported by facts, and submitted through the authorized process.","Describe what the Soldier did, the circumstances, the impact, and why it merits recognition.","No award is automatic: eligibility, approval authority, deadlines, and documentation matter."]]],
+  qa:[["What regulation governs Army military awards?","AR 600-8-22, Military Awards."],["What is the difference between a personal decoration and a unit award?","A personal decoration recognizes an individual’s action or service; a unit award recognizes collective performance by a unit."],["What makes a strong award recommendation?","Specific, verifiable actions and measurable impact, supported by documentation and submitted through the correct approval chain."]]},
+ {id:"prog", t:"Army programs", ref:"TC 7-22.7", intro:"The memo lists “Army Programs (TC 7-22.7, Chap. 8).” The NCO Guide was revised in August 2025, so confirm which edition and chapter the board means.",
+  sec:[["Programs",["<b>ACS</b> (Army Community Service): relocation, employment and financial readiness, family programs, and referrals.","<b>AER</b> (Army Emergency Relief): emergency financial assistance for qualifying needs; not for debt consolidation or vacations.","<b>SHARP:</b> prevention and response to sexual harassment, sexual assault, and retaliation; know reporting options.","<b>ACE</b> (suicide prevention): Ask directly, Care and reduce immediate danger, Escort to professional help.","<b>EO</b> (Equal Opportunity): fair treatment; address discriminatory harassment through proper channels.","<b>EFMP</b> (Exceptional Family Member Program): Family members with special medical or educational needs.","<b>ACES</b> / education benefits: counseling and programs for professional development.","<b>Financial readiness:</b> budgeting, debt management, consumer education.","<b>Family Advocacy Program:</b> prevention, education, and support related to family violence.","<b>H2F:</b> readiness through physical and nonphysical performance support."]]],
+  note:"To answer a program question: define it, state its purpose, give one example of when a Soldier would use it, and name the installation office or contact route.",
+  qa:[["What is the mission of ACS?","To connect Soldiers, Families, retirees, and eligible community members with coordinated support and readiness services."],["What does AER provide?","Emergency financial assistance for eligible Soldiers and Family members with qualifying needs."],["What does ACE stand for in suicide intervention?","Ask, Care, Escort."],["What should you do if a Soldier discloses a serious personal crisis?","Listen respectfully, assess immediate danger, do not leave them alone if risk is imminent, use emergency response and chain-of-command/behavioral-health resources, and follow current policy."],["What does EFMP support?","Eligible Family members with special medical or educational needs; it helps coordinate assignments and services."],["What does SHARP cover?","Prevention and response to sexual harassment, sexual assault, and retaliation."]]},
+ {id:"lead", t:"Army leadership and the profession", ref:"ADP 6-22", intro:"Army Leadership and the Profession.",
+  sec:[["Army Values — LDRSHIP",["<b>Loyalty:</b> bear true faith and allegiance to the Constitution, the Army, your unit, and other Soldiers.","<b>Duty:</b> fulfill your obligations.","<b>Respect:</b> treat people as they should be treated.","<b>Selfless Service:</b> put the Nation, the Army, and subordinates before yourself.","<b>Honor:</b> live up to Army Values.","<b>Integrity:</b> do what is right legally and morally.","<b>Personal Courage:</b> face fear, danger, or adversity, physical or moral."]],["Leadership requirements model",["Leadership is influencing people by providing purpose, direction, and motivation to accomplish the mission and improve the organization.","<b>Character:</b> Army Values, empathy, Warrior Ethos, discipline.","<b>Presence:</b> military and professional bearing, fitness, confidence, resilience.","<b>Intellect:</b> mental agility, sound judgment, innovation, interpersonal tact, expertise.","<b>Leads:</b> builds trust, leads by example, communicates, extends influence, leads with confidence.","<b>Develops:</b> prepares self, develops others, stewards the profession.","<b>Achieves:</b> gets results while balancing mission and care for people."]],["Mission command principles",["Competence; mutual trust; shared understanding; commander’s intent; mission orders; disciplined initiative; risk acceptance.","Disciplined initiative: acting within the commander’s intent when orders do not cover the situation.","Risk acceptance is deliberate and informed: identify hazards, assess, develop controls, implement, supervise/evaluate."]]],
+  qa:[["What is leadership according to ADP 6-22?","The process of influencing people by providing purpose, direction, and motivation to accomplish the mission and improve the organization."],["Name the seven Army Values.","Loyalty, Duty, Respect, Selfless Service, Honor, Integrity, and Personal Courage."],["What are the three leadership attributes?","Character, Presence, and Intellect."],["What are the three leadership competencies?","Leads, Develops, and Achieves."],["What is disciplined initiative?","Taking appropriate action within the commander’s intent when orders do not fully address the situation."],["Name the seven principles of mission command.","Competence, mutual trust, shared understanding, commander’s intent, mission orders, disciplined initiative, and risk acceptance."]]},
+ {id:"ar600", t:"Army Profession and Leadership Policy", ref:"AR 600-100", intro:"The policy companion to ADP 6-22. Confirm the current edition through Army Publishing Directorate.",
+  sec:[["Professional themes",["The Army Profession is built on trust, honorable service, military expertise, stewardship, and esprit de corps.","The Army Ethic guides decisions and conduct; leaders are accountable for upholding standards.","Leaders develop subordinates, build cohesive teams, steward resources, and maintain readiness.","Trust is built through competence, character, consistency, transparency, and fair treatment.","Professional conduct includes ethical decisions, responsibility, accountability, and respect for lawful orders.","The profession depends on disciplined, competent Soldiers who preserve the trust of the American people."]]],
+  qa:[["What is stewardship of the profession?","The responsibility to preserve and strengthen the Army Profession, its people, resources, standards, and capabilities for future generations."],["How does a leader build trust?","By being competent, honest, consistent, fair, accountable, and committed to the team and mission."],["How should a Soldier respond to an unlawful order?","Do not obey a clearly unlawful order; seek clarification when appropriate and report concerns through proper channels."],["What five characteristics is the Army Profession built on?","Trust, honorable service, military expertise, stewardship, and esprit de corps."]]},
+ {id:"medevac", t:"Medical evacuation", ref:"ATP 4-02.2", intro:"Medical Evacuation.",
+  sec:[["Purpose and terms",["<b>MEDEVAC</b> moves injured or ill personnel under medical supervision to a treatment facility.","<b>CASEVAC</b> generally means movement by nonmedical platforms without dedicated medical evacuation capability.","Planning includes routes, pickup sites, security, communications, weather, enemy threat, assets, and patient precedence.","Patient condition and urgency set precedence per current doctrine; never invent a precedence category.","The evacuation chain connects point of injury, Role 1, Role 2, and higher care as needed."]],["Nine-line MEDEVAC request",["<b>Line 1:</b> location of pickup site.","<b>Line 2:</b> radio frequency, call sign, and suffix.","<b>Line 3:</b> number of patients by precedence.","<b>Line 4:</b> special equipment required.","<b>Line 5:</b> number of patients by type (litter and ambulatory).","<b>Line 6:</b> security of the pickup site.","<b>Line 7:</b> method of marking the pickup site.","<b>Line 8:</b> nationality and status.","<b>Line 9:</b> terrain description / obstacles (or other mission-specific information per current format)."]],["Planning and communication",["Transmit concise, accurate information; repeat critical details and confirm receipt.","Use the communications plan and authentication procedures.","Prepare and control the pickup site; brief the pickup team on threats and hazards.","Continue care while waiting; do not delay lifesaving treatment for paperwork.","Clear handoff: mechanism of injury, injuries, signs/symptoms, treatment, tourniquet time, allergies/medications, changes in condition."]]],
+  note:"Some formats and local SOPs differ in how they label Line 9. Use your current unit card and communications procedure.",
+  qa:[["What is the difference between MEDEVAC and CASEVAC?","MEDEVAC uses dedicated medical evacuation capability and medical support; CASEVAC moves casualties on a nonmedical platform without that capability."],["Why is accurate casualty precedence important?","It matches urgency to available evacuation assets and supports appropriate triage and treatment."],["What publication is listed for medical evacuation?","ATP 4-02.2."],["What is Line 1 of the nine-line MEDEVAC request?","Location of the pickup site."],["What is Line 3 of the nine-line?","Number of patients by precedence."],["What is Line 5 of the nine-line?","Number of patients by type (litter and ambulatory)."],["What is Line 6 of the nine-line?","Security of the pickup site."],["What is Line 7 of the nine-line?","Method of marking the pickup site."],["What goes in a casualty handoff?","Mechanism of injury, injuries found, signs/symptoms, treatment, tourniquet time, allergies/medications when known, and changes in condition."]]},
+ {id:"role2", t:"Medical company — Role 2", ref:"ATP 4-02.6", intro:"Role 2 expands beyond Role 1 point-of-injury and aid-station care. Exact capabilities depend on organization, equipment, staffing, mission, and current doctrine.",
+  sec:[["Role 2 functions",["A higher level of treatment than Role 1; stabilizes casualties for return to duty or further evacuation.","May include a treatment platoon, medical evacuation platoon, preventive medicine, mental health, medical supply, and company headquarters.","Emergency treatment, limited patient holding, sick call/area support, and selected diagnostic and clinical capabilities.","Supports triage, stabilization, documentation, and evacuation to higher-role care.","Coordinates with supported units, evacuation assets, and higher treatment facilities.","Plans site selection, security, survivability, power, water, waste, patient flow, communications, and setup.","Do not promise surgery or a specialty unless the unit’s current configuration supports it."]],["Role 1 vs Role 2",["<b>Role 1:</b> immediate lifesaving measures, triage, treatment, and evacuation from point of injury or unit aid station.","<b>Role 2:</b> expanded treatment and stabilization, limited diagnostics and holding, plus additional support elements.","Both are part of one continuous system; casualties move to higher roles based on need."]]],
+  qa:[["What is the primary purpose of Role 2?","To provide expanded medical treatment and stabilization, support return-to-duty decisions, and prepare patients for further evacuation when needed."],["Does every Role 2 have the same capabilities?","No. Capabilities depend on its organization, staffing, equipment, mission, and current doctrine."],["What publication is listed for the medical company (Role 2)?","ATP 4-02.6, Employment and Operation of the Medical Company (Role 2)."],["What is the difference between Role 1 and Role 2?","Role 1 is immediate lifesaving care, triage, and evacuation at point of injury or the aid station; Role 2 adds expanded treatment, stabilization, limited diagnostics and holding, and more support elements."]]},
+ {id:"cmd", t:"Command-directed questions", ref:"Officers", officer:true, intro:"Listed for officers, but Soldiers and NCOs should understand the concepts because situational questions can draw from several topics.",
+  sec:[["Scenario framework",["<b>Mission:</b> what must be accomplished; what is the commander’s intent?","<b>People:</b> immediate risk to Soldiers, patients, and the public.","<b>Information:</b> what I know, what is uncertain, what must be reported.","<b>Options:</b> lawful, feasible courses of action.","<b>Risk:</b> hazards and the controls that reduce them.","<b>Decision:</b> choose, communicate, assign responsibilities.","<b>Follow-up:</b> supervise, reassess, capture lessons learned."]]],
+  qa:[["A Soldier reports unsafe conduct during training. What do you do?","Stop or control the immediate hazard, protect personnel, gather facts without prejudging, notify the appropriate leader, follow reporting requirements and SOP, and ensure corrective action and follow-up."],["A casualty arrives while your team is short on resources. How do you respond?","Use established triage and medical protocols, prioritize by patient acuity, request additional support, communicate limitations, and document and reassess care."],["A subordinate makes a mistake. What is your first leadership responsibility?","Protect safety and the mission, determine the facts, correct the immediate issue, then give feedback/counseling and training while maintaining dignity and accountability."],["How do you balance mission accomplishment and Soldier welfare?","Use disciplined risk management, apply standards fairly, preserve readiness, and make informed decisions that protect people while accomplishing the mission."]]}
+];
+
+const PUBS = [["AR 600-25","Salutes, Honors, and Visits of Courtesy","cc"],["TC 3-22.9","Rifle and Carbine","m4"],["TC 3-25.26","Map Reading and Land Navigation","nav"],["FM 7-22","Holistic Health and Fitness (H2F)","h2f"],["TC 4-02.1","First Aid","fa"],["TC 3-21.5","Drill and Ceremonies","dc"],["AR 670-1","Wear and Appearance of Army Uniforms and Insignia","uni"],["AR 600-8-22","Military Awards","aw"],["TC 7-22.7","The NCO Guide","prog"],["ADP 6-22","Army Leadership and the Profession","lead"],["AR 600-100","Army Profession and Leadership Policy","ar600"],["ATP 4-02.2","Medical Evacuation","medevac"],["ATP 4-02.6","Employment and Operation of the Medical Company (Role 2)","role2"]];
+
+const EXTRA_CARDS = [["LDRSHIP","Loyalty, Duty, Respect, Selfless Service, Honor, Integrity, Personal Courage","lead"],["H2F domains","Physical, nutritional, mental, spiritual, sleep","h2f"],["MARCH","Massive hemorrhage, Airway, Respiration, Circulation, Hypothermia/head injury","fa"],["Grid coordinates","Easting first, then northing — right, then up","nav"],["Back azimuth","Add 180° below 180°; subtract 180° at/above 180°","nav"],["Leadership attributes","Character, Presence, Intellect","lead"],["Leadership competencies","Leads, Develops, Achieves","lead"],["ACE","Ask, Care, Escort","prog"],["MEDEVAC vs CASEVAC","Dedicated medical evacuation capability vs nonmedical platform without dedicated MEDEVAC capability","medevac"]];
+
+const SELF_CHECK = ["I can deliver my autobiography in under 90 seconds.","I can recite the NCO Creed and Soldier’s Creed from the official text.","I can discuss three current events and explain why each matters.","I know the publication number and title for every subject area.","I can explain weapon safety and marksmanship fundamentals.","I can explain map scale, contour lines, grid coordinates, azimuth, back azimuth, and declination.","I can name all five H2F domains and explain training/recovery principles.","I can describe first-aid priorities and MARCH within my training.","I can execute and explain basic drill commands.","I can identify the uniform regulation and awards regulation.","I can explain what ACS, AER, SHARP, ACE, EFMP, and financial readiness resources do.","I can explain Army Values, leadership attributes/competencies, and mission command.","I can explain the purpose of MEDEVAC and the general Role 2 mission.","I can answer a scenario with the action, reason, risk controls, communication, and follow-up."];
+
+const LINKS = [["Army Publishing Directorate","https://armypubs.army.mil/","Current regulations, pamphlets, doctrine, and training circulars."],["Army Uniforms and Grooming","https://www.army.mil/uniforms/","AR 670-1, DA Pam 670-1, and uniform policy updates."],["Army Fitness Test / H2F","https://www.army.mil/aft/","Current Army Fitness Test information and H2F links."],["TC 7-22.7 The NCO Guide (Aug 2025)","https://www.usancoa.army.mil/Portals/71/ARN44634-TC_7-22_7-000-WEB-2_1.pdf","Chapter numbering changed from earlier editions."],["Army Community Service","https://www.armyresilience.army.mil/Army-Community-Service/","Overview of ACS programs and Family support."],["Army news","https://www.army.mil/news","Recent official Army developments for current events."],["Department of Defense news","https://www.defense.gov/News/","Current defense policy and operational news."]];
+
+const NINE = ["Location of pickup site","Radio frequency, call sign, and suffix","Number of patients by precedence","Special equipment required","Number of patients by type (litter / ambulatory)","Security of the pickup site","Method of marking the pickup site","Nationality and status","Terrain description / obstacles"];
+
+const ACROS = {
+  "LDRSHIP — Army Values":[["L","Loyalty"],["D","Duty"],["R","Respect"],["S","Selfless Service"],["H","Honor"],["I","Integrity"],["P","Personal Courage"]],
+  "MARCH — trauma priorities":[["M","Massive hemorrhage"],["A","Airway"],["R","Respiration"],["C","Circulation"],["H","Hypothermia / head injury"]],
+  "ACE — suicide intervention":[["A","Ask"],["C","Care"],["E","Escort"]],
+  "H2F domains":[["P","Physical"],["N","Nutritional"],["M","Mental"],["S","Spiritual"],["S","Sleep"]],
+  "Leadership attributes":[["C","Character"],["P","Presence"],["I","Intellect"]],
+  "Leadership competencies":[["L","Leads"],["D","Develops"],["A","Achieves"]],
+  "Marksmanship fundamentals":[["S","Steady position"],["A","Aiming"],["B","Breath control"],["T","Trigger control"],["F","Follow-through"]],
+  "Command voice":[["D","Distinctness"],["I","Inflection"],["C","Cadence"],["V","Volume"]]
+};
+
+/* ---------- storage ---------- */
+const KEY="mmb-board-oct26";
+let S={known:{},quizBest:null,check:{},tab:"study"};
+try{const raw=localStorage.getItem(KEY); if(raw) S=Object.assign(S,JSON.parse(raw));}catch(e){}
+function save(){try{localStorage.setItem(KEY,JSON.stringify(S));}catch(e){}}
+
+/* ---------- cards ---------- */
+const topicById=Object.fromEntries(TOPICS.map(t=>[t.id,t]));
+const CARDS=[];
+TOPICS.forEach(t=>t.qa.forEach((p,i)=>CARDS.push({id:t.id+"-"+i,topic:t.id,q:p[0],a:p[1]})));
+PUBS.forEach(p=>CARDS.push({id:"pub-"+p[0],topic:p[2],q:p[0],a:p[1],pub:true}));
+EXTRA_CARDS.forEach(p=>CARDS.push({id:"x-"+p[0],topic:p[2],q:p[0],a:p[1]}));
+
+const $=s=>document.querySelector(s);
+const shuffle=a=>{a=a.slice();for(let i=a.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[a[i],a[j]]=[a[j],a[i]];}return a;};
+const esc=s=>s.replace(/[&<>"]/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));
+const topicLabel=id=>{const t=topicById[id];return t.ref&&!t.officer?t.ref:t.t;};
+
+/* ---------- tabs ---------- */
+const VIEWS=["study","cards","quiz","board","drills"];
+function show(v){
+  if(!VIEWS.includes(v)) v="study";
+  VIEWS.forEach(x=>{$("#view-"+x).hidden=x!==v;$("#tab-"+x).setAttribute("aria-selected",x===v);});
+  S.tab=v;save();
+  if(v==="study") renderSummary();
+  if(v==="drills") drawCompass();
+  window.scrollTo(0,0);
+}
+document.querySelectorAll("nav.tabs button").forEach(b=>b.addEventListener("click",()=>{show(b.dataset.view);try{history.replaceState(null,"","#"+b.dataset.view);}catch(e){}}));
+
+/* ---------- study ---------- */
+function mastery(id){const c=CARDS.filter(x=>x.topic===id);return c.length?c.filter(x=>S.known[x.id]).length/c.length:0;}
+function renderTopics(){
+  $("#topics").innerHTML=TOPICS.map((t,i)=>`
+  <details class="topic" id="t-${t.id}">
+    <summary><span class="tnum">${String(i+1).padStart(2,"0")}</span>
+      <span class="ttitle"><strong>${esc(t.t)}</strong>${t.ref?`<span class="pub">${esc(t.ref)}</span>`:""}</span>
+      <span class="meter" title="Cards known"><i style="width:${Math.round(mastery(t.id)*100)}%"></i></span></summary>
+    <div class="tbody">
+      <p class="lede">${esc(t.intro)}</p>
+      ${t.sec.map(s=>`<div style="display:grid;gap:6px"><h3>${esc(s[0])}</h3><ul>${s[1].map(x=>`<li>${x}</li>`).join("")}</ul></div>`).join("")}
+      ${t.note?`<p class="note">${esc(t.note)}</p>`:""}
+      <div style="display:grid;gap:6px"><h3>Practice questions</h3>
+      <div class="qa">${t.qa.map(p=>`<button type="button" aria-expanded="false"><span class="q">${esc(p[0])}</span><span class="a" hidden>${esc(p[1])}</span><span class="hint">Answer aloud, then tap to check</span></button>`).join("")}</div></div>
+      <div class="row"><button class="btn" data-drill="${t.id}">Flashcards for this topic</button><button class="btn" data-quiz="${t.id}">Quiz this topic</button></div>
+    </div>
+  </details>`).join("");
+  $("#topics").querySelectorAll(".qa button").forEach(b=>b.addEventListener("click",()=>{const a=b.querySelector(".a"),h=b.querySelector(".hint");a.hidden=!a.hidden;h.hidden=!a.hidden?true:false;b.setAttribute("aria-expanded",!a.hidden);}));
+  $("#topics").querySelectorAll("[data-drill]").forEach(b=>b.addEventListener("click",()=>{$("#card-deck").value=b.dataset.drill;buildDeck();show("cards");}));
+  $("#topics").querySelectorAll("[data-quiz]").forEach(b=>b.addEventListener("click",()=>{$("#quiz-topic").value=b.dataset.quiz;show("quiz");startQuiz();}));
+}
+function renderSummary(){
+  $("#sum-known").textContent=`${Object.keys(S.known).filter(k=>S.known[k]&&CARDS.some(c=>c.id===k)).length}/${CARDS.length}`;
+  $("#sum-quiz").textContent=S.quizBest==null?"–":S.quizBest+"%";
+  $("#sum-check").textContent=`${SELF_CHECK.filter((_,i)=>S.check[i]).length}/${SELF_CHECK.length}`;
+  TOPICS.forEach(t=>{const m=document.querySelector(`#t-${t.id} .meter i`);if(m)m.style.width=Math.round(mastery(t.id)*100)+"%";});
+}
+$("#selfcheck").innerHTML=SELF_CHECK.map((s,i)=>`<label><input type="checkbox" id="sc-${i}" ${S.check[i]?"checked":""}><span>${esc(s)}</span></label>`).join("");
+$("#selfcheck").addEventListener("change",e=>{const i=e.target.id.slice(3);S.check[i]=e.target.checked;save();renderSummary();});
+$("#links").innerHTML=LINKS.map(l=>`<a class="btn" style="justify-content:flex-start;text-align:left;text-decoration:none;display:grid;gap:2px" href="${l[1]}" target="_blank" rel="noopener"><span>${esc(l[0])} ↗</span><small style="font-weight:400;color:var(--muted)">${esc(l[2])}</small></a>`).join("");
+
+/* ---------- flashcards ---------- */
+const deckOpts=`<option value="all">All topics (${CARDS.length} cards)</option><option value="pubs">Publication numbers</option>`+TOPICS.map(t=>`<option value="${t.id}">${esc(t.t)}</option>`).join("");
+$("#card-deck").innerHTML=deckOpts;
+let deck=[],di=0,seen=0,total=0;
+function buildDeck(){
+  const v=$("#card-deck").value,onlyU=$("#card-unknown").getAttribute("aria-pressed")==="true";
+  let c=v==="all"?CARDS:v==="pubs"?CARDS.filter(x=>x.pub):CARDS.filter(x=>x.topic===v);
+  if(onlyU) c=c.filter(x=>!S.known[x.id]);
+  deck=shuffle(c);di=0;seen=0;total=deck.length;renderCard();
+}
+function renderCard(){
+  const f=$("#flash");f.classList.remove("flipped");
+  $("#card-prog").style.width=total?(seen/total*100)+"%":"0";
+  if(!deck.length){$("#f-q").textContent=total?"Deck complete. Shuffle to go again.":"No cards here. Turn off the filter or pick another deck.";$("#f-a").textContent="";$("#f-topic").textContent=$("#f-topic2").textContent="";$("#card-count").textContent=`${seen}/${total} done`;return;}
+  const c=deck[di];
+  $("#f-q").textContent=c.pub?`What is the title of ${c.q}?`:c.q;
+  $("#f-a").textContent=c.a;
+  $("#f-topic").textContent=$("#f-topic2").textContent=topicLabel(c.topic)+(S.known[c.id]?" · known":"");
+  $("#card-count").textContent=`${seen}/${total} done · ${deck.length} left`;
+}
+function flip(){if(deck.length)$("#flash").classList.toggle("flipped");}
+function grade(ok){
+  if(!deck.length)return;
+  const c=deck.splice(di,1)[0];
+  if(ok){S.known[c.id]=true;seen++;}else{delete S.known[c.id];deck.splice(Math.min(deck.length,3+Math.floor(Math.random()*3)),0,c);}
+  save();di=0;renderCard();
+}
+$("#flash").addEventListener("click",flip);$("#card-flip").addEventListener("click",flip);
+$("#card-know").addEventListener("click",()=>grade(true));$("#card-again").addEventListener("click",()=>grade(false));
+$("#card-shuffle").addEventListener("click",buildDeck);$("#card-deck").addEventListener("change",buildDeck);
+$("#card-unknown").addEventListener("click",e=>{const b=e.currentTarget;b.setAttribute("aria-pressed",b.getAttribute("aria-pressed")!=="true");buildDeck();});
+document.addEventListener("keydown",e=>{if($("#view-cards").hidden||e.target.matches("input,select,textarea"))return;if(e.key===" "){e.preventDefault();flip();}if(e.key==="ArrowRight")grade(true);if(e.key==="ArrowLeft")grade(false);});
+
+/* ---------- quiz ---------- */
+$("#quiz-topic").innerHTML=deckOpts.replace(`All topics (${CARDS.length} cards)`,"All topics");
+let Q=[],qi=0,qScore=0,qMissed=[];
+function makeQuestion(c){
+  let pool,prompt,answer;
+  if(c.pub){
+    if(Math.random()<.5){prompt=`What is the title of ${c.q}?`;answer=c.a;pool=PUBS.map(p=>p[1]);}
+    else{prompt=`Which publication is “${c.a}”?`;answer=c.q;pool=PUBS.map(p=>p[0]);}
+  }else{prompt=c.q;answer=c.a;const same=CARDS.filter(x=>!x.pub&&x.topic===c.topic).map(x=>x.a),other=CARDS.filter(x=>!x.pub&&x.topic!==c.topic).map(x=>x.a);pool=same.concat(shuffle(other).slice(0,6));}
+  const wrong=shuffle([...new Set(pool.filter(x=>x!==answer))]).slice(0,3);
+  return {prompt,answer,opts:shuffle([answer,...wrong]),topic:c.topic};
+}
+function startQuiz(){
+  const v=$("#quiz-topic").value;
+  let c=v==="all"?CARDS:v==="pubs"?CARDS.filter(x=>x.pub):CARDS.filter(x=>x.topic===v);
+  Q=shuffle(c).slice(0,10).map(makeQuestion);qi=0;qScore=0;qMissed=[];renderQ();
+}
+function renderQ(){
+  const area=$("#quiz-area");
+  if(qi>=Q.length){
+    const pct=Math.round(qScore/Q.length*100);
+    if(Q.length>=5&&(S.quizBest==null||pct>S.quizBest)){S.quizBest=pct;save();}
+    area.innerHTML=`<div class="panel"><span class="eyebrow">Result</span><div class="result-big">${qScore}/${Q.length}</div><p>${pct>=90?"Board ready on this set. Practice saying the answers aloud.":pct>=70?"Solid. Review the misses below, then run it again.":"Go back to the Study tab for these topics, then retake the quiz."}</p>
+      ${qMissed.length?`<h3>Review</h3><div class="missed">${qMissed.map(m=>`<div><b>${esc(m.prompt)}</b><small>${esc(topicLabel(m.topic))}</small>${esc(m.answer)}</div>`).join("")}</div>`:""}
+      <div class="row"><button class="btn primary" id="quiz-again">New quiz</button></div></div>`;
+    $("#quiz-again").addEventListener("click",startQuiz);return;
+  }
+  const q=Q[qi];
+  area.innerHTML=`<div class="panel"><div class="row" style="justify-content:space-between"><span class="eyebrow">${esc(topicLabel(q.topic))}</span><span class="count">Question ${qi+1} of ${Q.length} · Score ${qScore}</span></div>
+    <div class="progress"><i style="width:${qi/Q.length*100}%"></i></div>
+    <div class="qtext">${esc(q.prompt)}</div>
+    <div class="opts">${q.opts.map((o,i)=>`<button class="opt" data-i="${i}"><span class="k">${"ABCD"[i]}</span><span>${esc(o)}</span></button>`).join("")}</div>
+    <div class="row" id="q-next" hidden><button class="btn primary">Next question</button></div></div>`;
+  area.querySelectorAll(".opt").forEach(b=>b.addEventListener("click",()=>{
+    const pick=q.opts[b.dataset.i],ok=pick===q.answer;
+    area.querySelectorAll(".opt").forEach(x=>{x.disabled=true;if(q.opts[x.dataset.i]===q.answer)x.classList.add("right");});
+    if(ok)qScore++;else{b.classList.add("wrong");qMissed.push(q);}
+    const n=area.querySelector("#q-next");n.hidden=false;n.querySelector("button").focus();
+    n.querySelector("button").onclick=()=>{qi++;renderQ();};
+  }));
+}
+$("#quiz-start").addEventListener("click",startQuiz);
+
+/* ---------- mock board ---------- */
+let role="soldier",BQ=[],bi=0,bRes=[],timerId=null;
+document.querySelectorAll("[data-role]").forEach(b=>b.addEventListener("click",()=>{role=b.dataset.role;document.querySelectorAll("[data-role]").forEach(x=>x.setAttribute("aria-pressed",x===b));}));
+const ROLE_TIP={soldier:"Focus on clear definitions, standards, and what you would do.",nco:"Add how you would lead, train, counsel, and enforce standards.",officer:"Add planning, risk management, resources, command responsibility, and medical mission support."};
+function startBoard(){
+  BQ=[];
+  TOPICS.forEach(t=>{if(t.officer&&role!=="officer")return;shuffle(t.qa).slice(0,2).forEach(p=>BQ.push({q:p[0],a:p[1],topic:t.id}));});
+  BQ=shuffle(BQ);bi=0;bRes=[];renderBoard();
+}
+function stopTimer(){if(timerId){clearInterval(timerId);timerId=null;}}
+function renderBoard(){
+  stopTimer();const area=$("#board-area");
+  if(bi>=BQ.length){
+    const g=bRes.filter(r=>r===2).length,p=bRes.filter(r=>r===1).length,m=bRes.filter(r=>r===0).length;
+    const weak=[...new Set(BQ.filter((q,i)=>bRes[i]===0).map(q=>q.topic))];
+    area.innerHTML=`<div class="panel"><span class="eyebrow">Board complete</span><div class="result-big">${g}<span style="font-size:28px;color:var(--muted)"> / ${BQ.length} strong</span></div>
+      <div class="summary"><div><b style="color:var(--good)">${g}</b><span>strong</span></div><div><b style="color:var(--warn)">${p}</b><span>partial</span></div><div><b style="color:var(--bad)">${m}</b><span>missed</span></div></div>
+      ${weak.length?`<h3>Study next</h3><div class="row">${weak.map(w=>`<button class="chip" data-goto="${w}">${esc(topicById[w].t)}</button>`).join("")}</div>`:"<p>No misses. Run it again as another board type.</p>"}
+      <div class="row"><button class="btn primary" id="board-again">Run another board</button></div></div>`;
+    area.querySelectorAll("[data-goto]").forEach(b=>b.addEventListener("click",()=>{show("study");const d=$("#t-"+b.dataset.goto);d.open=true;d.scrollIntoView({behavior:"smooth"});}));
+    $("#board-again").addEventListener("click",startBoard);return;
+  }
+  const q=BQ[bi],t=topicById[q.topic],secs=+$("#board-time").value;
+  area.innerHTML=`<div class="panel">
+    <div class="row" style="justify-content:space-between"><span class="eyebrow">${esc(t.t)}${t.ref&&!t.officer?" · "+esc(t.ref):""}</span><span class="count">${bi+1} of ${BQ.length}</span></div>
+    <div class="board-q">${esc(q.q)}</div>
+    <p class="lede">${ROLE_TIP[role]}</p>
+    ${secs?`<div class="timer" id="timer"><b id="tsec">${secs}</b><div class="bar"><i id="tbar" style="width:100%"></i></div></div>`:""}
+    <div class="row" id="b-reveal-row"><button class="btn primary" id="b-reveal">Reveal answer</button><button class="btn" id="b-skip">Skip</button></div>
+    <div id="b-ans" hidden style="display:grid;gap:12px"><p class="note" style="background:var(--good-soft);border-color:var(--good)">${esc(q.a)}</p>
+      <span class="eyebrow">How did you do?</span>
+      <div class="row"><button class="btn bad" data-g="0">Missed it</button><button class="btn warn" data-g="1">Partial</button><button class="btn good" data-g="2">Nailed it</button></div></div>
+  </div>`;
+  if(secs){let left=secs;timerId=setInterval(()=>{left--;const s=$("#tsec"),bar=$("#tbar");if(!s){stopTimer();return;}s.textContent=Math.max(left,0);bar.style.width=Math.max(left,0)/secs*100+"%";if(left<=Math.min(10,secs/4))$("#timer").classList.add("late");if(left<=0){stopTimer();reveal();}},1000);}
+  function reveal(){stopTimer();$("#b-ans").hidden=false;$("#b-reveal-row").hidden=true;}
+  $("#b-reveal").addEventListener("click",reveal);
+  $("#b-skip").addEventListener("click",()=>{bRes[bi]=0;bi++;renderBoard();});
+  area.querySelectorAll("[data-g]").forEach(b=>b.addEventListener("click",()=>{bRes[bi]=+b.dataset.g;bi++;renderBoard();}));
+}
+$("#board-start").addEventListener("click",startBoard);
+
+/* ---------- drills: back azimuth ---------- */
+let az=0,streak=0;
+function css(v){return getComputedStyle(document.documentElement).getPropertyValue(v).trim();}
+function drawCompass(showBack){
+  const c=$("#compass"),x=c.getContext("2d"),r=120,cx=140,cy=140;
+  x.clearRect(0,0,280,280);
+  x.strokeStyle=css("--line");x.lineWidth=2;x.beginPath();x.arc(cx,cy,r,0,Math.PI*2);x.stroke();
+  x.fillStyle=css("--muted");x.font="600 18px "+css("--mono");x.textAlign="center";x.textBaseline="middle";
+  [["N",0],["E",90],["S",180],["W",270]].forEach(([l,d])=>{const a=(d-90)*Math.PI/180;x.fillText(l,cx+Math.cos(a)*(r-20),cy+Math.sin(a)*(r-20));});
+  for(let d=0;d<360;d+=10){const a=(d-90)*Math.PI/180,l=d%30?6:12;x.beginPath();x.moveTo(cx+Math.cos(a)*r,cy+Math.sin(a)*r);x.lineTo(cx+Math.cos(a)*(r-l),cy+Math.sin(a)*(r-l));x.stroke();}
+  const arrow=(deg,col,w)=>{const a=(deg-90)*Math.PI/180;x.strokeStyle=col;x.lineWidth=w;x.beginPath();x.moveTo(cx,cy);x.lineTo(cx+Math.cos(a)*(r-34),cy+Math.sin(a)*(r-34));x.stroke();x.fillStyle=col;x.beginPath();x.arc(cx+Math.cos(a)*(r-34),cy+Math.sin(a)*(r-34),6,0,Math.PI*2);x.fill();};
+  arrow(az,css("--accent"),5);
+  if(showBack)arrow((az+180)%360,css("--olive"),3);
+  x.fillStyle=css("--fg");x.beginPath();x.arc(cx,cy,5,0,Math.PI*2);x.fill();
+}
+function newAz(){az=Math.floor(Math.random()*360);$("#az").textContent=String(az).padStart(3,"0")+"°";$("#az-in").value="";$("#az-fb").textContent="";$("#az-fb").className="feedback";drawCompass(false);}
+$("#az-form").addEventListener("submit",e=>{e.preventDefault();const v=parseInt($("#az-in").value,10),ans=az<180?az+180:az-180,fb=$("#az-fb");
+  if(isNaN(v)){fb.textContent="Enter a number from 0 to 359.";fb.className="feedback no";return;}
+  if(v===ans){streak++;fb.textContent=`Correct: ${String(ans).padStart(3,"0")}°.`;fb.className="feedback ok";drawCompass(true);setTimeout(newAz,1100);}
+  else{streak=0;fb.textContent=`Not quite. ${String(az).padStart(3,"0")}° is ${az<180?"below 180°, so add":"180° or above, so subtract"} 180° → ${String(ans).padStart(3,"0")}°.`;fb.className="feedback no";drawCompass(true);}
+  $("#az-score").textContent="Streak "+streak;});
+$("#az-next").addEventListener("click",newAz);
+matchMedia("(prefers-color-scheme: dark)").addEventListener?.("change",()=>drawCompass(false));
+
+/* ---------- drills: nine-line ---------- */
+let order=[];
+function renderLines(state){
+  $("#lines").innerHTML=order.map((n,i)=>`<div class="line ${state?(n===i?"ok":"no"):""}"><span class="ln">Line ${i+1}</span><span>${esc(NINE[n])}</span><span class="mv"><button aria-label="Move up" data-up="${i}" ${i===0?"disabled":""}>▲</button><button aria-label="Move down" data-dn="${i}" ${i===order.length-1?"disabled":""}>▼</button></span></div>`).join("");
+  $("#lines").querySelectorAll("[data-up]").forEach(b=>b.addEventListener("click",()=>{const i=+b.dataset.up;[order[i-1],order[i]]=[order[i],order[i-1]];renderLines();}));
+  $("#lines").querySelectorAll("[data-dn]").forEach(b=>b.addEventListener("click",()=>{const i=+b.dataset.dn;[order[i+1],order[i]]=[order[i],order[i+1]];renderLines();}));
+}
+function shuffleLines(){do{order=shuffle([...Array(9).keys()]);}while(order.every((n,i)=>n===i));$("#lines-fb").textContent="";renderLines();}
+$("#lines-shuffle").addEventListener("click",shuffleLines);
+$("#lines-check").addEventListener("click",()=>{const right=order.filter((n,i)=>n===i).length;renderLines(true);const fb=$("#lines-fb");fb.textContent=right===9?"All nine lines in order.":`${right} of 9 in the right place. Red rows are out of order.`;fb.className="feedback "+(right===9?"ok":"no");});
+
+/* ---------- drills: acronyms ---------- */
+$("#acro-pick").innerHTML=Object.keys(ACROS).map(k=>`<option>${esc(k)}</option>`).join("");
+function renderAcro(){
+  const a=ACROS[$("#acro-pick").value];
+  $("#acro-letters").innerHTML=a.map((p,i)=>`<button data-i="${i}" aria-label="Reveal ${p[0]}">${p[0]}</button>`).join("");
+  $("#acro-words").innerHTML=a.map((p,i)=>`<div><b class="pub">${p[0]}</b> <span class="hide" id="aw-${i}">${esc(p[1])}</span></div>`).join("");
+  $("#acro-letters").querySelectorAll("button").forEach(b=>b.addEventListener("click",()=>{b.classList.add("done");$("#aw-"+b.dataset.i).classList.remove("hide");}));
+}
+$("#acro-pick").addEventListener("change",renderAcro);$("#acro-reset").addEventListener("click",renderAcro);
+
+/* ---------- boot ---------- */
+renderTopics();renderSummary();buildDeck();newAz();shuffleLines();renderAcro();
+$("#quiz-area").innerHTML=`<div class="panel"><span class="eyebrow">Ready</span><p>Pick a topic or keep “All topics,” then start. Your best score shows on the Study tab.</p></div>`;
+$("#board-area").innerHTML=`<div class="panel"><span class="eyebrow">How it works</span><p>Up to two questions from each subject area, mixed together, as the memo describes. Officer boards add command-directed scenarios.</p></div>`;
+const h=(location.hash||"").slice(1);
+show(VIEWS.includes(h)?h:S.tab);
+</script>
+</body>
+</html>
